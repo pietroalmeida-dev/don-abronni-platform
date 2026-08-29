@@ -1,0 +1,14 @@
+/* Ponto de entrada dos estilos globais.
+ *
+ * Decisão de arquitetura de CSS: em vez de converter ~2600 linhas de CSS já
+ * existente e validado para CSS Modules (o que exigiria reescrever seletores,
+ * duplicar regras e correria risco real de quebrar a identidade visual sem
+ * nenhum ganho funcional), o CSS original foi portado como estilos globais.
+ * Isso preserva exatamente a aparência atual, que era um requisito explícito
+ * da migração.
+ *
+ * CSS Modules é usado nos componentes novos, sem equivalente na versão
+ * anterior (ex.: LoadingSpinner) — ver justificativa completa no README.
+ */
+@import './styles/global.css';
+@import './styles/dashboard.css';

@@ -1,0 +1,2 @@
+Coloque aqui logonova.png e image-qrcode.svg (usados no Hero e na tela de pagamento Pix), com os mesmos
+nomes do projeto original.

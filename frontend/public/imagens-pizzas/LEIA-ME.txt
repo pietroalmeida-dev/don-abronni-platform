@@ -1,0 +1,4 @@
+Coloque aqui os arquivos de imagem originais das pizzas (pizza-Margherita.png, pizza-Calabresa.webp, etc.),
+com os mesmos nomes usados em src/data/catalog.js. Nenhuma imagem binária fazia parte dos arquivos de texto
+fornecidos ao Claude durante a migração, então os caminhos foram preservados, mas os arquivos precisam ser
+copiados manualmente do projeto original para esta pasta.

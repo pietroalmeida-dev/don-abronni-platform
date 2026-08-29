@@ -1,0 +1,15 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

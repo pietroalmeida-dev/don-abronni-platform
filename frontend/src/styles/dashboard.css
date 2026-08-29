@@ -1,0 +1,450 @@
+/* ========== BASE E LAYOUT ========== */
+:root {
+    --primary: #0f2b5e;
+    --primary-dark: #091c3f;
+    --primary-light: #1f4090;
+    --accent: #2c4c8c;
+    --gray-bg: #f8fafc;
+    --gray-light: #eef2f6;
+    --text-dark: #1e2a3a;
+    --text-muted: #4a627a;
+    --white: #ffffff;
+    --danger: #dc2626;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    --shadow-card: 0 12px 28px -10px rgba(0, 0, 0, 0.06);
+    --radius-card: 1.2rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: var(--text-dark); overflow-x: hidden; }
+
+/* === LOGIN === */
+.login-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #f0f4fa 0%, #e6edf5 100%);
+    display: flex; align-items: center; justify-content: center; z-index: 5000;
+}
+.login-card {
+    background: white; max-width: 420px; width: 90%; padding: 2.5rem 2rem;
+    border-radius: 2rem; box-shadow: 0 25px 40px -12px rgba(0,0,0,0.2); text-align: center;
+}
+.login-brand i { font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem; }
+.login-brand h2 { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+.login-brand span { color: var(--text-muted); font-size: 0.9rem; }
+.input-icon { position: relative; margin: 1.2rem 0; }
+.input-icon i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+.input-icon input { width: 100%; padding: 0.9rem 1rem 0.9rem 2.8rem; border: 1px solid #e2e8f0; border-radius: 2rem; }
+.input-icon input:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(15,43,94,0.1); }
+.btn-login { background: linear-gradient(115deg, #0f2b5e, #1f4792); width: 100%; padding: 0.9rem; border: none; border-radius: 3rem; color: white; font-weight: 700; cursor: pointer; }
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(15,43,94,0.4); }
+.demo-hint { font-size: 0.7rem; color: #7f8c8d; margin-top: 1.2rem; }
+
+/* === DASHBOARD LAYOUT === */
+#dashboardApp { display: flex; min-height: 100vh; }
+.sidebar {
+    width: 280px; background: linear-gradient(180deg, #ffffff 0%, #fefefe 100%);
+    border-right: 1px solid #eef2f6; position: fixed; left: 0; top: 0; bottom: 0; z-index: 200;
+    transition: transform 0.3s ease; display: flex; flex-direction: column;
+}
+.sidebar-header { padding: 1.8rem 1.5rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; align-items: center; }
+.logo-side { display: flex; align-items: center; gap: 0.6rem; font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+.logo-side i { font-size: 1.8rem; }
+.close-sidebar { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
+/* min-height:0 é o mesmo bug de sempre, só que no eixo vertical: .sidebar-nav é
+   flex:1 dentro de um flex-container em coluna (.sidebar), e o eixo principal de
+   um flex-column é a altura — por padrão ele nunca encolhe abaixo da altura do
+   próprio conteúdo (lista de itens do menu). Em janelas baixas (notebook com
+   pouca altura, celular deitado), isso empurrava "Clientes" e "Sair" pra fora da
+   tela, sem nenhuma forma de rolar até eles. overflow-y:auto some com a barra só
+   quando realmente precisa, e cabeçalho/rodapé da sidebar continuam sempre visíveis. */
+.sidebar-nav { flex: 1; min-height: 0; overflow-y: auto; padding: 2rem 0; }
+.sidebar-nav ul { list-style: none; }
+.nav-item {
+    display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1.8rem;
+    margin: 0.2rem 0; cursor: pointer; transition: 0.2s; color: var(--text-muted); font-weight: 500;
+}
+.nav-item i { width: 24px; font-size: 1.2rem; }
+.nav-item.active { background: rgba(15,43,94,0.08); color: var(--primary); border-left: 4px solid var(--primary); }
+.nav-item:hover:not(.active) { background: #f8fafc; color: var(--primary-dark); }
+.badge { background: var(--danger); color: white; font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 2rem; margin-left: auto; }
+.sidebar-footer { padding: 1.5rem; font-size: 0.7rem; color: #8c9ab0; text-align: center; border-top: 1px solid #eef2f6; }
+/* min-width:0 pela mesma razão do .charts-row acima: item de flex (#dashboardApp)
+   não encolhe abaixo do maior conteúdo interno por padrão — é a última linha de
+   defesa caso algum conteúdo futuro (não só os gráficos já corrigidos) volte a
+   forçar a página a ficar mais larga que a tela. */
+.main-content { flex: 1; min-width: 0; margin-left: 280px; transition: margin 0.2s; }
+.top-bar { background: white; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eef2f6; position: sticky; top: 0; z-index: 100; }
+.menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
+.top-bar-title h2 { font-size: 1.5rem; font-weight: 700; }
+.admin-profile { display: flex; align-items: center; gap: 0.6rem; background: var(--gray-light); padding: 0.4rem 1rem; border-radius: 3rem; }
+.content-area { padding: 2rem; }
+
+/* Cards e elementos padrão */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.stat-card { background: white; border-radius: var(--radius-card); padding: 1.2rem 1.5rem; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-card); border: 1px solid #eef2f6; }
+.stat-card:hover { transform: translateY(-3px); }
+.stat-info h4 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+.stat-number { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
+.stat-icon { font-size: 2.3rem; color: var(--primary-light); opacity: 0.7; }
+/* minmax(0, 1fr), não só "1fr": uma track de grid sem esse 0 tem mínimo implícito
+   "auto" (tamanho do conteúdo) — com um <canvas> do Chart.js dentro (que tem
+   largura/altura intrínsecas próprias, via atributos HTML), a track nunca encolhia
+   abaixo do tamanho "natural" do gráfico, empurrando a página inteira mais larga
+   que a tela em telas estreitas. Mesma família do bug do e-mail vazando no menu
+   mobile (ali era flex-item, aqui é grid-track), raiz idêntica: dar um "0" explícito
+   pro item conseguir encolher de verdade. */
+.charts-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.chart-card { background: white; border-radius: var(--radius-card); padding: 1rem; box-shadow: var(--shadow-card); min-width: 0; }
+.chart-card canvas { max-width: 100%; }
+.section-title { margin: 1.5rem 0 1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.data-table { width: 100%; background: white; border-radius: 1.2rem; overflow-x: auto; border: 1px solid #edf2f7; }
+.data-table table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #f0f2f5; }
+.data-table th { font-weight: 700; color: var(--text-dark); background: #fafcff; }
+.btn-sm { background: none; border: 1px solid var(--primary-light); padding: 0.3rem 0.9rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 500; cursor: pointer; }
+.btn-sm:hover { background: var(--primary); color: white; }
+.btn-primary-dash { background: var(--primary); color: white; border: none; padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+/* padding no overlay: sem isso, um modal alto (Novo Produto, Editar Funcionário...)
+   encostava direto na borda da janela em telas baixas, sem nenhuma margem de
+   respiro — mesmo padrão já usado em .checkout-modal-overlay no site público. */
+.modal-overlay-dash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; visibility: hidden; opacity: 0; transition: 0.2s; }
+.modal-overlay-dash.active { visibility: visible; opacity: 1; }
+/* max-height + overflow-y:auto: antes o modal só "crescia" com o conteúdo do
+   formulário, sem limite — em janelas mais baixas (notebook, celular deitado),
+   o topo e o rodapé (inclusive o botão "Salvar") ficavam fora da tela, sem
+   nenhuma forma de rolar até eles. Mesmo bug de rolagem já corrigido antes no
+   .checkout-modal e no .login-modal do site público, agora também aqui. */
+.modal-dash { background: white; width: 500px; max-width: 90%; max-height: 100%; border-radius: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; }
+.modal-header { padding: 1rem 1.5rem; background: var(--primary); color: white; display: flex; justify-content: space-between; position: sticky; top: 0; z-index: 2; flex-shrink: 0; }
+.modal-body { padding: 1.8rem; }
+/* Escopado a .modal-header (não ".close-modal-btn" solto): essa mesma classe também
+   é usada no botão de fechar dos modais de conta do site público (ModalOverlay.jsx),
+   que ficam sobre um card branco, não sobre este cabeçalho escuro. Sem o escopo, esta
+   regra "branco sobre branco" vazava pro site público e deixava o X invisível lá. */
+.modal-header .close-modal-btn { background: none; border: none; font-size: 1.6rem; color: white; cursor: pointer; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; font-weight: 500; }
+.form-group input, .form-group select { width: 100%; padding: 0.7rem; border-radius: 0.8rem; border: 1px solid #ccc; }
+
+/* ========== SEÇÃO DE PEDIDOS (mantida) ========== */
+.orders-header-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.order-status-card { background: white; border-radius: 1.2rem; padding: 0.8rem 1.2rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card); flex: 1; min-width: 140px; cursor: pointer; border: 1px solid #eef2f6; }
+.order-status-card.active { border-left: 4px solid var(--primary); background: #f8fbff; }
+.order-status-card .status-icon { width: 42px; height: 42px; background: var(--gray-light); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--primary); }
+.order-status-card .status-info h4 { font-size: 0.8rem; margin: 0; color: var(--text-muted); }
+.order-status-card .status-count { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); line-height: 1; }
+.search-filter-bar { display: flex; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+.search-filter-bar input { flex: 2; padding: 0.8rem 1rem; border-radius: 2rem; border: 1px solid #e2e8f0; }
+.orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+.order-card { background: white; border-radius: 1.2rem; padding: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eef2f6; transition: 0.2s; }
+.order-card:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -12px rgba(0,0,0,0.1); }
+.order-card-header { display: flex; justify-content: space-between; border-bottom: 1px solid #f0f2f5; padding-bottom: 0.7rem; margin-bottom: 0.7rem; }
+.order-id { font-weight: 800; background: #f1f5f9; padding: 0.2rem 0.8rem; border-radius: 2rem; font-size: 0.8rem; }
+.order-status-badge { font-size: 0.7rem; padding: 0.2rem 0.7rem; border-radius: 2rem; font-weight: 600; }
+.status-preparando { background: #fef3c7; color: #b45309; }
+.status-saiu { background: #dbeafe; color: #1e40af; }
+.status-entregue { background: #dcfce7; color: #166534; }
+.order-customer { font-weight: 700; margin-bottom: 0.3rem; }
+.order-items { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+.order-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+.order-total { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
+.update-status-btn { background: none; border: 1px solid var(--primary-light); padding: 0.3rem 1rem; border-radius: 2rem; font-size: 0.7rem; cursor: pointer; }
+.empty-orders { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+/* ========== SEÇÃO DE ESTOQUE (mantida) ========== */
+.stock-header-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+.stock-stat-card { background: white; border-radius: 1rem; padding: 1rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card); border-left: 4px solid var(--primary); }
+.stock-stat-icon { width: 48px; height: 48px; background: var(--gray-light); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--primary); }
+.stock-stat-info h4 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+.stock-stat-number { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); line-height: 1; }
+.chart-and-alerts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+.stock-chart-card, .stock-alerts-card { background: white; border-radius: var(--radius-card); padding: 1rem; box-shadow: var(--shadow-card); }
+.stock-alerts-card h4 { margin-bottom: 0.8rem; font-size: 1rem; }
+.alert-item { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0; border-bottom: 1px solid #f0f2f5; font-size: 0.85rem; }
+.alert-item i { width: 24px; color: var(--danger); }
+.stock-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.stock-search { display: flex; gap: 0.5rem; flex: 2; }
+.stock-search input { flex: 1; padding: 0.6rem 1rem; border-radius: 2rem; border: 1px solid #e2e8f0; }
+.stock-category-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cat-btn { background: var(--gray-light); border: none; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.8rem; cursor: pointer; }
+.cat-btn.active { background: var(--primary); color: white; }
+.stock-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
+.stock-item-card { background: white; border-radius: 1rem; padding: 1rem; border: 1px solid #eef2f6; transition: 0.2s; }
+.stock-item-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.stock-item-name { font-weight: 700; font-size: 1.1rem; }
+.stock-item-unit { font-size: 0.7rem; background: var(--gray-light); padding: 0.2rem 0.5rem; border-radius: 2rem; }
+.stock-item-quantity { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 0.5rem 0; }
+.stock-progress { background: #e2e8f0; border-radius: 1rem; height: 8px; overflow: hidden; margin: 0.5rem 0; }
+.stock-progress-bar { background: var(--success); height: 100%; width: 0%; border-radius: 1rem; }
+.stock-progress-bar.low { background: var(--danger); }
+.stock-item-min { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+.stock-item-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
+.stock-item-actions button { background: none; border: 1px solid var(--primary-light); padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; cursor: pointer; }
+.empty-stock { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+/* ========== SEÇÃO DE FUNCIONÁRIOS (mantida) ========== */
+.employees-header-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+.employee-stat-card { background: white; border-radius: 1rem; padding: 1rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-card); border-left: 4px solid var(--primary); }
+.employee-stat-icon { width: 48px; height: 48px; background: var(--gray-light); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--primary); }
+.employee-stat-info h4 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+.employee-stat-number { font-size: 1.6rem; font-weight: 800; color: var(--text-dark); line-height: 1; }
+.employees-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.employees-search { display: flex; gap: 0.5rem; flex: 2; }
+.employees-search input { flex: 1; padding: 0.6rem 1rem; border-radius: 2rem; border: 1px solid #e2e8f0; }
+.role-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.role-btn { background: var(--gray-light); border: none; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.8rem; cursor: pointer; }
+.role-btn.active { background: var(--primary); color: white; }
+.charts-employees { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+.employees-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+.employee-card { background: white; border-radius: 1.2rem; padding: 1rem; border: 1px solid #eef2f6; transition: all 0.2s; position: relative; overflow: hidden; }
+.employee-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); }
+.employee-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem; }
+.employee-avatar { width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 1.2rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.6rem; }
+.employee-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.employee-role { display: inline-block; background: var(--gray-light); padding: 0.2rem 0.7rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 600; color: var(--primary); }
+.employee-details { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.8rem 0; font-size: 0.85rem; color: var(--text-muted); }
+.employee-details i { width: 24px; color: var(--primary-light); }
+.employee-salary { font-weight: 700; color: var(--primary); font-size: 1rem; }
+.employee-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.5rem; border-top: 1px solid #f0f2f5; padding-top: 0.8rem; }
+.employee-actions button { background: none; border: 1px solid var(--primary-light); padding: 0.3rem 0.8rem; border-radius: 2rem; font-size: 0.7rem; cursor: pointer; }
+.employee-actions button:hover { background: var(--primary); color: white; }
+.empty-employees { text-align: center; padding: 3rem; color: var(--text-muted); }
+
+/* ========== SEÇÃO DE CLIENTES (NOVA – REFORMULADA) ========== */
+.customers-header-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+.customer-stat-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--primary);
+}
+.customer-stat-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gray-light);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--primary);
+}
+.customer-stat-info h4 {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+}
+.customer-stat-number {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1;
+}
+.customers-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.customers-search {
+    display: flex;
+    gap: 0.5rem;
+    flex: 2;
+}
+.customers-search input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid #e2e8f0;
+}
+.customers-sort {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+.sort-btn {
+    background: var(--gray-light);
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.sort-btn.active {
+    background: var(--primary);
+    color: white;
+}
+.charts-customers {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.customers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.2rem;
+}
+.customer-card {
+    background: white;
+    border-radius: 1.2rem;
+    padding: 1rem;
+    border: 1px solid #eef2f6;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+.customer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+}
+.customer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+}
+.customer-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+.customer-avatar {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #4e73b0, var(--primary));
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+}
+.customer-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+.customer-email {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.customer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.customer-details i {
+    width: 24px;
+    color: var(--primary-light);
+}
+.customer-orders {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1rem;
+    background: #eef2ff;
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 2rem;
+    width: fit-content;
+}
+.customer-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    border-top: 1px solid #f0f2f5;
+    padding-top: 0.8rem;
+}
+.customer-actions button {
+    background: none;
+    border: 1px solid var(--primary-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.customer-actions button:hover {
+    background: var(--primary);
+    color: white;
+}
+.empty-customers {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .sidebar { transform: translateX(-100%); position: fixed; z-index: 1000; }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .close-sidebar { display: block; }
+    .charts-row, .chart-and-alerts, .charts-employees, .charts-customers { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .content-area { padding: 1rem; }
+    /* .orders-grid ficou de fora dessa lista originalmente — seu piso de 340px
+       (minmax(340px, 1fr)) é maior que a própria tela em celulares (~320-390px),
+       então os cards de pedido vazavam pra fora mesmo com auto-fill/auto-fit. */
+    .customers-grid, .employees-grid, .orders-grid { grid-template-columns: 1fr; }
+    /* Nos celulares mais estreitos (~320px), "Dashboard" + o badge "Proprietário"
+       não cabiam lado a lado com o padding padrão do top-bar (2rem) — o badge
+       vazava alguns pixels pra fora da tela. Reduz o padding e mostra só o ícone
+       do badge (o nome do cargo já não cabe, e o ícone sozinho já comunica que é
+       a área logada). */
+    .top-bar { padding: 1rem; }
+    .admin-profile span { display: none; }
+}
+
+/* ========== TOAST (feedback visual) ==========
+   O painel não tinha nenhum mecanismo de feedback visual — usava alert() e prompt()
+   do navegador, que interrompem a interface e destoam do resto do design. Reutiliza
+   o mesmo padrão visual (e as mesmas variáveis de cor) já usado no site público. */
+.toast-msg {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--primary-dark);
+    color: white;
+    padding: 0.7rem 1.6rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+.toast-msg.toast-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast-msg.toast-erro { background: #b91c1c; }
+.toast-msg.toast-aviso { background: #b45309; }
+.toast-msg.toast-sucesso { background: var(--primary-dark); }
