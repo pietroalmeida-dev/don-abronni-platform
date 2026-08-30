@@ -2,7 +2,7 @@
   {
     "nome": "Pizza Margherita",
     "descricao": "Molho de tomate, muçarela de búfala, manjericão e azeite.",
-    "imagem": "/imagens-pizzas/pizza-Margherita.png",
+    "imagem": "/imagens-pizzas/pizza-Margherita.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": true,
@@ -20,7 +20,7 @@
   {
     "nome": "Pizza Pepperoni",
     "descricao": "Pepperoni defumado, muçarela e orégano. Clássica e intensa.",
-    "imagem": "/imagens-pizzas/pizza-Pepperoni.png",
+    "imagem": "/imagens-pizzas/pizza-Pepperoni.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": true,
@@ -38,7 +38,7 @@
   {
     "nome": "Pizza Quatro Queijos",
     "descricao": "Muçarela, provolone, parmesão e gorgonzola, finalizada com ervas.",
-    "imagem": "/imagens-pizzas/pizza-Quatro-Queijos.png",
+    "imagem": "/imagens-pizzas/pizza-Quatro-Queijos.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": true,
@@ -92,7 +92,7 @@
   {
     "nome": "Pizza Bahiana",
     "descricao": "Calabresa fatiada, cebola e ovo",
-    "imagem": "/imagens-pizzas/pizza-Baiana.png",
+    "imagem": "/imagens-pizzas/pizza-Baiana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -110,7 +110,7 @@
   {
     "nome": "Pizza Alho",
     "descricao": "Queijo tipo mussarela, alho e parmesão",
-    "imagem": "/imagens-pizzas/pizza-alho.png",
+    "imagem": "/imagens-pizzas/pizza-alho.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -128,7 +128,7 @@
   {
     "nome": "Pizza Napolitana",
     "descricao": "Mussarela, tomate e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Napolitana.png",
+    "imagem": "/imagens-pizzas/pizza-Napolitana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -146,7 +146,7 @@
   {
     "nome": "Pizza Namorados",
     "descricao": "Presunto, mussarela e tomate",
-    "imagem": "/imagens-pizzas/pizza-Namorados.png",
+    "imagem": "/imagens-pizzas/pizza-Namorados.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -164,7 +164,7 @@
   {
     "nome": "Pizza Milho",
     "descricao": "Milho com queijo tipo mussarela",
-    "imagem": "/imagens-pizzas/pizza-Milho.png",
+    "imagem": "/imagens-pizzas/pizza-Milho.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -200,7 +200,7 @@
   {
     "nome": "Pizza Cheddar",
     "descricao": "Queijo tipo mussarela e cheddar",
-    "imagem": "/imagens-pizzas/pizza-Cheddar.png",
+    "imagem": "/imagens-pizzas/pizza-Cheddar.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -218,7 +218,7 @@
   {
     "nome": "Pizza À Moda",
     "descricao": "Queijo tipo mussarela, escarola e bacon",
-    "imagem": "/imagens-pizzas/pizza-A-Moda.png",
+    "imagem": "/imagens-pizzas/pizza-A-Moda.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -236,7 +236,7 @@
   {
     "nome": "Pizza Milho com Catupiry",
     "descricao": "Milho e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Milho-Com-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Milho-Com-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -254,7 +254,7 @@
   {
     "nome": "Pizza Baiana com Bacon",
     "descricao": "Calabresa, ovo, pimenta, bacon e cebola",
-    "imagem": "/imagens-pizzas/pizza-Baiana-Com-Bacon.png",
+    "imagem": "/imagens-pizzas/pizza-Baiana-Com-Bacon.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -272,7 +272,7 @@
   {
     "nome": "Pizza Champignon",
     "descricao": "Queijo tipo mussarela, champignon e tomate",
-    "imagem": "/imagens-pizzas/pizza-Champignon.png",
+    "imagem": "/imagens-pizzas/pizza-Champignon.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -290,7 +290,7 @@
   {
     "nome": "Pizza Milho com Bacon",
     "descricao": "Milho, catupiry e bacon",
-    "imagem": "/imagens-pizzas/pizza-Milho-Com-Bacon.png",
+    "imagem": "/imagens-pizzas/pizza-Milho-Com-Bacon.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -308,7 +308,7 @@
   {
     "nome": "Pizza Dois Queijos",
     "descricao": "Queijo tipo mussarela e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Dois-Queijo.png",
+    "imagem": "/imagens-pizzas/pizza-Dois-Queijo.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -326,7 +326,7 @@
   {
     "nome": "Pizza Catupiry",
     "descricao": "Catupiry e tomate",
-    "imagem": "/imagens-pizzas/pizza-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -344,7 +344,7 @@
   {
     "nome": "Pizza Bambina",
     "descricao": "Queijo tipo mussarela, bacon e presunto",
-    "imagem": "/imagens-pizzas/pizza-Bambina.png",
+    "imagem": "/imagens-pizzas/pizza-Bambina.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -362,7 +362,7 @@
   {
     "nome": "Pizza Caipira",
     "descricao": "Queijo tipo mussarela, frango e milho",
-    "imagem": "/imagens-pizzas/pizza-Caipira.png",
+    "imagem": "/imagens-pizzas/pizza-Caipira.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -380,7 +380,7 @@
   {
     "nome": "Pizza Da' Sabrina",
     "descricao": "Queijo tipo mussarela, presunto e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Da-Sabrina.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Sabrina.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -398,7 +398,7 @@
   {
     "nome": "Pizza Toscana",
     "descricao": "Queijo tipo mussarela, calabresa fatiada",
-    "imagem": "/imagens-pizzas/pizza-Toscana.png",
+    "imagem": "/imagens-pizzas/pizza-Toscana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -416,7 +416,7 @@
   {
     "nome": "Pizza Lombo",
     "descricao": "Queijo tipo mussarela, lombo suíno e cebola",
-    "imagem": "/imagens-pizzas/pizza-Lombo.png",
+    "imagem": "/imagens-pizzas/pizza-Lombo.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -434,7 +434,7 @@
   {
     "nome": "Pizza Brócolis",
     "descricao": "Queijo tipo mussarela e brócolis",
-    "imagem": "/imagens-pizzas/pizza-Brocolis.png",
+    "imagem": "/imagens-pizzas/pizza-Brocolis.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -452,7 +452,7 @@
   {
     "nome": "Pizza Portuguesa",
     "descricao": "Queijo tipo mussarela, ovo, ervilha, cebola e presunto",
-    "imagem": "/imagens-pizzas/pizza-Portuguesa.png",
+    "imagem": "/imagens-pizzas/pizza-Portuguesa.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -470,7 +470,7 @@
   {
     "nome": "Pizza Siciliana",
     "descricao": "Queijo tipo mussarela, champignon, cebola e bacon",
-    "imagem": "/imagens-pizzas/pizza-Siciliana.png",
+    "imagem": "/imagens-pizzas/pizza-Siciliana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -488,7 +488,7 @@
   {
     "nome": "Pizza Brócolis com Alho",
     "descricao": "Queijo tipo mussarela, brócolis e alho torrado",
-    "imagem": "/imagens-pizzas/pizza-Brocolis-Com-Alho.png",
+    "imagem": "/imagens-pizzas/pizza-Brocolis-Com-Alho.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -506,7 +506,7 @@
   {
     "nome": "Pizza Nordestina",
     "descricao": "Queijo tipo mussarela e carne seca temperada",
-    "imagem": "/imagens-pizzas/pizza-Nordestina.png",
+    "imagem": "/imagens-pizzas/pizza-Nordestina.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -524,7 +524,7 @@
   {
     "nome": "Pizza Tutti",
     "descricao": "Frango, brócolis, cheddar ou catupiry e bacon",
-    "imagem": "/imagens-pizzas/pizza-Tuiti.png",
+    "imagem": "/imagens-pizzas/pizza-Tuiti.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -542,7 +542,7 @@
   {
     "nome": "Pizza Brócolis com Catupiry",
     "descricao": "Brócolis com catupiry",
-    "imagem": "/imagens-pizzas/pizza-Brocolis-Com-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Brocolis-Com-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -560,7 +560,7 @@
   {
     "nome": "Pizza Jardineira",
     "descricao": "Queijo tipo mussarela, escarola, palmito, ervilha e milho",
-    "imagem": "/imagens-pizzas/pizza-Jardineira.png",
+    "imagem": "/imagens-pizzas/pizza-Jardineira.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -578,7 +578,7 @@
   {
     "nome": "Pizza Da' Donna",
     "descricao": "Queijo tipo mussarela e pepperoni",
-    "imagem": "/imagens-pizzas/pizza-Da-Dona.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Dona.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -596,7 +596,7 @@
   {
     "nome": "Pizza Paris",
     "descricao": "Queijo tipo mussarela, peito de peru defumado e cebola",
-    "imagem": "/imagens-pizzas/pizza-Paris.png",
+    "imagem": "/imagens-pizzas/pizza-Paris.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -614,7 +614,7 @@
   {
     "nome": "Pizza Três Queijos",
     "descricao": "Queijo tipo mussarela, catupiry e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Tres-Queijo.jpg",
+    "imagem": "/imagens-pizzas/pizza-Tres-Queijo.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -632,7 +632,7 @@
   {
     "nome": "Pizza Lombo com Catupiry",
     "descricao": "Lombinho suíno, catupiry e cebola",
-    "imagem": "/imagens-pizzas/pizza-Lombo-Com-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Lombo-Com-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -650,7 +650,7 @@
   {
     "nome": "Pizza Frango com Catupiry",
     "descricao": "Peito de frango desfiado e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Frango-Com-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Frango-Com-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -668,7 +668,7 @@
   {
     "nome": "Pizza Toscana Especial",
     "descricao": "Calabresa fatiada, pepperoni e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Toscana2.png",
+    "imagem": "/imagens-pizzas/pizza-Toscana2.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -686,7 +686,7 @@
   {
     "nome": "Pizza Rúcula",
     "descricao": "Queijo tipo mussarela, rúcula e tomate seco",
-    "imagem": "/imagens-pizzas/pizza-Rucula.png",
+    "imagem": "/imagens-pizzas/pizza-Rucula.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -704,7 +704,7 @@
   {
     "nome": "Pizza Do' Pappy",
     "descricao": "Salame, champignon, catupiry e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Do-Papy.png",
+    "imagem": "/imagens-pizzas/pizza-Do-Papy.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -722,7 +722,7 @@
   {
     "nome": "Pizza Romana",
     "descricao": "Queijo tipo mussarela, palmito e cebola",
-    "imagem": "/imagens-pizzas/pizza-Romana.png",
+    "imagem": "/imagens-pizzas/pizza-Romana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -740,7 +740,7 @@
   {
     "nome": "Pizza Pizzaiolo",
     "descricao": "Queijo tipo mussarela, presunto, palmito e cebola",
-    "imagem": "/imagens-pizzas/pizza-Pizzaiolo.png",
+    "imagem": "/imagens-pizzas/pizza-Pizzaiolo.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -758,7 +758,7 @@
   {
     "nome": "Pizza Tomate Seco",
     "descricao": "Queijo tipo mussarela e tomate seco",
-    "imagem": "/imagens-pizzas/pizza-Tomate-Seco.png",
+    "imagem": "/imagens-pizzas/pizza-Tomate-Seco.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -776,7 +776,7 @@
   {
     "nome": "Pizza Paris com Catupiry",
     "descricao": "Peito de peru defumado, catupiry e cebola",
-    "imagem": "/imagens-pizzas/pizza-Paris2.png",
+    "imagem": "/imagens-pizzas/pizza-Paris2.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -794,7 +794,7 @@
   {
     "nome": "Pizza Palmito",
     "descricao": "Queijo tipo mussarela e palmito",
-    "imagem": "/imagens-pizzas/pizza-Palmito.png",
+    "imagem": "/imagens-pizzas/pizza-Palmito.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -812,7 +812,7 @@
   {
     "nome": "Pizza Lombo Completa",
     "descricao": "Queijo tipo mussarela, lombo suíno, palmito, ervilha e cebola",
-    "imagem": "/imagens-pizzas/pizza-Lombo03.png",
+    "imagem": "/imagens-pizzas/pizza-Lombo03.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -830,7 +830,7 @@
   {
     "nome": "Pizza Eliche",
     "descricao": "Queijo tipo mussarela, aliche e tomate seco",
-    "imagem": "/imagens-pizzas/pizza-Eliche.png",
+    "imagem": "/imagens-pizzas/pizza-Eliche.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -848,7 +848,7 @@
   {
     "nome": "Pizza Atum",
     "descricao": "Atum com cobertura de queijo tipo mussarela",
-    "imagem": "/imagens-pizzas/pizza-Atum.png",
+    "imagem": "/imagens-pizzas/pizza-Atum.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -866,7 +866,7 @@
   {
     "nome": "Pizza Da' Casa",
     "descricao": "Queijo tipo mussarela, palmito, champignon e bacon",
-    "imagem": "/imagens-pizzas/pizza-Da-Casa.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Casa.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -884,7 +884,7 @@
   {
     "nome": "Pizza Frango Especial",
     "descricao": "Queijo tipo mussarela, frango desfiado, palmito, milho e bacon",
-    "imagem": "/imagens-pizzas/pizza-Frango02.png",
+    "imagem": "/imagens-pizzas/pizza-Frango02.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -902,7 +902,7 @@
   {
     "nome": "Pizza Atum com Catupiry",
     "descricao": "Atum e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Atum-Com-Catupiry.png",
+    "imagem": "/imagens-pizzas/pizza-Atum-Com-Catupiry.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -920,7 +920,7 @@
   {
     "nome": "Pizza Brócolis Especial",
     "descricao": "Queijo tipo mussarela, brócolis, palmito e bacon",
-    "imagem": "/imagens-pizzas/pizza-Brocolis-Especial.png",
+    "imagem": "/imagens-pizzas/pizza-Brocolis-Especial.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -938,7 +938,7 @@
   {
     "nome": "Pizza Paulista",
     "descricao": "Queijo tipo mussarela, presunto, palmito, milho, cebola e bacon",
-    "imagem": "/imagens-pizzas/pizza-Paulista.png",
+    "imagem": "/imagens-pizzas/pizza-Paulista.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -956,7 +956,7 @@
   {
     "nome": "Pizza Atum com Cebola",
     "descricao": "Atum e cebola",
-    "imagem": "/imagens-pizzas/pizza-Atum-Com-Cebola.png",
+    "imagem": "/imagens-pizzas/pizza-Atum-Com-Cebola.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -974,7 +974,7 @@
   {
     "nome": "Pizza Peruana",
     "descricao": "Queijo tipo mussarela, calabresa, atum, palmito e ervilha",
-    "imagem": "/imagens-pizzas/pizza-Peruana.png",
+    "imagem": "/imagens-pizzas/pizza-Peruana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -992,7 +992,7 @@
   {
     "nome": "Pizza De' Tutti",
     "descricao": "Queijo tipo mussarela, manjericão, atum e champignon",
-    "imagem": "/imagens-pizzas/pizza-De-Tutti.png",
+    "imagem": "/imagens-pizzas/pizza-De-Tutti.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1010,7 +1010,7 @@
   {
     "nome": "Pizza Cinco Queijos",
     "descricao": "Queijo tipo mussarela, catupiry, parmesão, provolone e gorgonzola",
-    "imagem": "/imagens-pizzas/pizza-5Queijos.png",
+    "imagem": "/imagens-pizzas/pizza-5Queijos.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1028,7 +1028,7 @@
   {
     "nome": "Pizza Bacana",
     "descricao": "Peito de peru, palmito, catupiry e bacon",
-    "imagem": "/imagens-pizzas/pizza-Bacana.png",
+    "imagem": "/imagens-pizzas/pizza-Bacana.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1046,7 +1046,7 @@
   {
     "nome": "Pizza Josy",
     "descricao": "Queijo tipo mussarela, frango, catupiry e bacon",
-    "imagem": "/imagens-pizzas/pizza-Josy.png",
+    "imagem": "/imagens-pizzas/pizza-Josy.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1064,7 +1064,7 @@
   {
     "nome": "Pizza Carne Seca",
     "descricao": "Queijo tipo mussarela, carne seca, cheddar, provolone e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Carne-Seca.png",
+    "imagem": "/imagens-pizzas/pizza-Carne-Seca.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1082,7 +1082,7 @@
   {
     "nome": "Pizza Do Dré",
     "descricao": "Queijo tipo mussarela, salsicha picada com molho e batata palha",
-    "imagem": "/imagens-pizzas/pizza-Do-Dré.png",
+    "imagem": "/imagens-pizzas/pizza-Do-Dré.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1100,7 +1100,7 @@
   {
     "nome": "Pizza Gabi",
     "descricao": "Queijo tipo mussarela, catupiry, tomate e peito de peru",
-    "imagem": "/imagens-pizzas/pizza-Gaby.png",
+    "imagem": "/imagens-pizzas/pizza-Gaby.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1118,7 +1118,7 @@
   {
     "nome": "Pizza Gabi Bacon",
     "descricao": "Queijo tipo mussarela, peito de peru e bacon",
-    "imagem": "/imagens-pizzas/pizza-Gbai-Bacon.png",
+    "imagem": "/imagens-pizzas/pizza-Gbai-Bacon.webp",
     "precoBase": 36.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1136,7 +1136,7 @@
   {
     "nome": "Pizza Camille",
     "descricao": "Queijo tipo mussarela, frango, cheddar e batata palha",
-    "imagem": "/imagens-pizzas/pizza-Camile.png",
+    "imagem": "/imagens-pizzas/pizza-Camile.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1154,7 +1154,7 @@
   {
     "nome": "Pizza Qualquer Uma",
     "descricao": "Calabresa fatiada, cebola e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Qualquer-Uma.png",
+    "imagem": "/imagens-pizzas/pizza-Qualquer-Uma.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1172,7 +1172,7 @@
   {
     "nome": "Pizza Pode Ser",
     "descricao": "Palmito com catupiry",
-    "imagem": "/imagens-pizzas/pizza-Pode-Ser.png",
+    "imagem": "/imagens-pizzas/pizza-Pode-Ser.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1190,7 +1190,7 @@
   {
     "nome": "Pizza Tanto Faz",
     "descricao": "Queijo tipo mussarela, catupiry, frango e presunto",
-    "imagem": "/imagens-pizzas/pizza-Tanto-Faz.png",
+    "imagem": "/imagens-pizzas/pizza-Tanto-Faz.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1208,7 +1208,7 @@
   {
     "nome": "Pizza Não Sei",
     "descricao": "Queijo tipo mussarela, carne seca, alho poró e parmesão",
-    "imagem": "/imagens-pizzas/pizza-Nao-sei.png",
+    "imagem": "/imagens-pizzas/pizza-Nao-sei.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1226,7 +1226,7 @@
   {
     "nome": "Pizza Massaru",
     "descricao": "Queijo tipo mussarela, catupiry, pepperoni e calabresa",
-    "imagem": "/imagens-pizzas/pizza-Massarau.png",
+    "imagem": "/imagens-pizzas/pizza-Massarau.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1244,7 +1244,7 @@
   {
     "nome": "Pizza Da' Sabrina 02",
     "descricao": "Queijo tipo mussarela, calabresa, catupiry e alho poró",
-    "imagem": "/imagens-pizzas/pizza-Da-Sabrina2.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Sabrina2.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1262,7 +1262,7 @@
   {
     "nome": "Pizza Da Casa 03",
     "descricao": "Queijo tipo mussarela, presunto, catupiry e carne seca",
-    "imagem": "/imagens-pizzas/pizza-Da-Casa3.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Casa3.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1280,7 +1280,7 @@
   {
     "nome": "Pizza Da' Nona",
     "descricao": "Queijo tipo mussarela e berinjela",
-    "imagem": "/imagens-pizzas/pizza-Da-Nona.png",
+    "imagem": "/imagens-pizzas/pizza-Da-Nona.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1298,7 +1298,7 @@
   {
     "nome": "Pizza Josy Alho Poró",
     "descricao": "Queijo tipo mussarela e alho poró",
-    "imagem": "/imagens-pizzas/pizza-Josy-Alho-Poró.png",
+    "imagem": "/imagens-pizzas/pizza-Josy-Alho-Poró.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1316,7 +1316,7 @@
   {
     "nome": "Pizza Josy Atum",
     "descricao": "Queijo tipo mussarela, atum e alho poró",
-    "imagem": "/imagens-pizzas/pizza-Josy-Atum.png",
+    "imagem": "/imagens-pizzas/pizza-Josy-Atum.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1334,7 +1334,7 @@
   {
     "nome": "Pizza Josy Portuguesa",
     "descricao": "Ervilha, ovo, cebola e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Josy-Portuguesa.png",
+    "imagem": "/imagens-pizzas/pizza-Josy-Portuguesa.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1352,7 +1352,7 @@
   {
     "nome": "Pizza Dom Abronni",
     "descricao": "Queijo tipo mussarela, catupiry, pepperoni, alho poró e bacon",
-    "imagem": "/imagens-pizzas/pizza-Dom-Abronni.png",
+    "imagem": "/imagens-pizzas/pizza-Dom-Abronni.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1370,7 +1370,7 @@
   {
     "nome": "Pizza Portuguesa Especial",
     "descricao": "Queijo tipo mussarela, presunto, ovo, ervilha, palmito, cebola e catupiry",
-    "imagem": "/imagens-pizzas/pizza-Portuguesa-Especial.png",
+    "imagem": "/imagens-pizzas/pizza-Portuguesa-Especial.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1388,7 +1388,7 @@
   {
     "nome": "Pizza Hot Dog",
     "descricao": "Queijo tipo mussarela, salsicha, batata palha e cheddar",
-    "imagem": "/imagens-pizzas/pizza-Hot-Dog.png",
+    "imagem": "/imagens-pizzas/pizza-Hot-Dog.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1406,7 +1406,7 @@
   {
     "nome": "Pizza Izilda",
     "descricao": "Atum, cebola e cream cheese",
-    "imagem": "/imagens-pizzas/pizza-Izilda.png",
+    "imagem": "/imagens-pizzas/pizza-Izilda.webp",
     "precoBase": 37.99,
     "categoria": "pizza_salgada",
     "destaque": false,
@@ -1424,7 +1424,7 @@
   {
     "nome": "Pizza Prestígio",
     "descricao": "Chocolate com coco ralado",
-    "imagem": "/imagens-pizzas/piiza-Prestigio.png",
+    "imagem": "/imagens-pizzas/piiza-Prestigio.webp",
     "precoBase": 37.99,
     "categoria": "pizza_doce",
     "destaque": false,
@@ -1442,7 +1442,7 @@
   {
     "nome": "Pizza Brigadeiro",
     "descricao": "Chocolate e granulado",
-    "imagem": "/imagens-pizzas/pizza-Brigadeiro.png",
+    "imagem": "/imagens-pizzas/pizza-Brigadeiro.webp",
     "precoBase": 37.99,
     "categoria": "pizza_doce",
     "destaque": false,
@@ -1460,7 +1460,7 @@
   {
     "nome": "Pizza Romeu e Julieta",
     "descricao": "Queijo tipo mussarela e goiabada",
-    "imagem": "/imagens-pizzas/pizza-Romeu-Julieta.png",
+    "imagem": "/imagens-pizzas/pizza-Romeu-Julieta.webp",
     "precoBase": 37.99,
     "categoria": "pizza_doce",
     "destaque": false,
@@ -1478,7 +1478,7 @@
   {
     "nome": "Pizza M&M's",
     "descricao": "Chocolate com M&M's",
-    "imagem": "/imagens-pizzas/pizza-M&M.png",
+    "imagem": "/imagens-pizzas/pizza-M&M.webp",
     "precoBase": 37.99,
     "categoria": "pizza_doce",
     "destaque": false,
@@ -1514,7 +1514,7 @@
   {
     "nome": "Fanta 2L",
     "descricao": "Refrigerante Fanta 2 litros",
-    "imagem": "/imagens-pizzas/bebidas-Fanta.png",
+    "imagem": "/imagens-pizzas/bebidas-Fanta.webp",
     "precoBase": 15.0,
     "categoria": "bebida",
     "destaque": false,
@@ -1532,7 +1532,7 @@
   {
     "nome": "Dolly 2L",
     "descricao": "Refrigerante Dolly 2 litros",
-    "imagem": "/imagens-pizzas/bebidas-Dolly.png",
+    "imagem": "/imagens-pizzas/bebidas-Dolly.webp",
     "precoBase": 10.0,
     "categoria": "bebida",
     "destaque": false,

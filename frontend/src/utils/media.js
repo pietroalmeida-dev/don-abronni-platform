@@ -1,6 +1,6 @@
 import { CONFIG } from '../config';
 
-// As imagens do catálogo semeado (ex.: /imagens-pizzas/pizza-Margherita.png) são
+// As imagens do catálogo semeado (ex.: /imagens-pizzas/pizza-Margherita.webp) são
 // arquivos estáticos do PRÓPRIO front-end (ver public/imagens-pizzas/ no README) —
 // funcionam direto como caminho relativo. Já as imagens enviadas pelo painel admin
 // (POST /api/produtos/upload-imagem) ficam salvas no disco do BACKEND e são
