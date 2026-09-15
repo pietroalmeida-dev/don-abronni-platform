@@ -1,3 +1,8 @@
 # Configuração local de ferramenta (Claude Code) — histórico de permissões de
 # quem programou, não é código do projeto nem faz sentido pra quem for avaliar.
 .claude/
+
+# Dependência da raiz (concurrently, usado só pelo "npm run dev"). frontend/ e
+# backend/ já ignoram os próprios node_modules nos seus .gitignore individuais —
+# este cobre o node_modules que fica na raiz do monorepo.
+node_modules/

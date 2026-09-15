@@ -27,6 +27,26 @@ npm run dev                # sobe backend (3001) e frontend (5173) juntos
 Rodar separadamente, se preferir: `npm run dev --prefix backend` /
 `npm run dev --prefix frontend`.
 
+### Rodando em outro computador (ex.: notebook de um integrante)
+
+O `backend/.env` real (com a connection string do MongoDB Atlas e o `JWT_SECRET`)
+**nunca é commitado** — cada máquina precisa do próprio arquivo. Para outro
+integrante rodar o projeto:
+
+1. Peça o conteúdo do `backend/.env` a quem já tem (ex.: você) por um canal
+   **privado** (WhatsApp direto, não grupo; nunca por e-mail público ou print
+   compartilhado) — é a senha real do banco de dados do projeto.
+2. Cole em `backend/.env` (não em `.env.example`).
+3. No MongoDB Atlas → **Network Access**, confirme que o IP da nova máquina está
+   liberado — ou que a lista está como `0.0.0.0/0` ("Allow Access from Anywhere"),
+   recomendado pra evitar ficar liberando IP toda apresentação. Como as credenciais
+   continuam exigidas pra autenticar, isso não expõe o banco a qualquer um — só
+   evita a etapa de allowlist por IP.
+4. `npm run install:all && npm run dev`.
+
+O `frontend/.env` não guarda segredo nenhum (só a URL da API) — pode ser criado a
+partir do `.env.example` sem pedir nada a ninguém.
+
 ## Arquitetura
 
 ```

@@ -24,7 +24,7 @@ export default function Location() {
           <div className="map-container">
             <iframe
               title="Mapa da Don Abronni"
-              src={`https://www.google.com/maps/embed/v1/place?key=${CONFIG.GOOGLE_MAPS_EMBED_KEY}&q=Rua+Baltazar+de+Campos,+253,+S%C3%A3o+Paulo+SP`}
+              src="https://maps.google.com/maps?q=Rua+Baltazar+de+Campos,+253,+S%C3%A3o+Paulo+SP&output=embed"
               loading="lazy"
             />
           </div>

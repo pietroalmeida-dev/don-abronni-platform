@@ -4,6 +4,7 @@ import { useToast } from './ToastContext';
 
 const CartContext = createContext(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getItemUnitPrice(item) {
   return item.price + (item.borderPrice || 0);
 }
@@ -64,6 +65,7 @@ export function CartProvider({ children }) {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCart() {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error('useCart precisa ser usado dentro de um CartProvider');

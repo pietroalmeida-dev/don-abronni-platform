@@ -12,12 +12,6 @@ export const CONFIG = {
   // pra manter "npm run dev" funcionando sem precisar criar um .env local.
   API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3001/api',
 
-  // Antes hardcoded direto no JSX do mapa (Location.jsx) — movida pra cá/pro .env
-  // por organização, não por segurança: chave de Embed API é feita pra ficar
-  // pública no HTML, a proteção real é restringir por domínio no Google Cloud
-  // Console (ver .env.example).
-  GOOGLE_MAPS_EMBED_KEY: import.meta.env.VITE_GOOGLE_MAPS_EMBED_KEY || '',
-
   WHATSAPP_NUMERO: '5511986414492',
   WHATSAPP_NUMERO_EXIBICAO: '(11) 98641-4492',
   TELEFONE_LOJA_EXIBICAO: '(11) 4112-1201',

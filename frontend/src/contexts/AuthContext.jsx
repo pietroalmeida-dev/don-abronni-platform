@@ -85,6 +85,12 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// Hook exportado junto do Provider (padrão comum de Context em React) — colide com
+// a regra react-refresh/only-export-components, que espera só componentes no
+// arquivo. Separar o hook num arquivo próprio só por causa disso não compensa
+// (mexeria no import de toda tela que usa useAuth); desabilitar a regra aqui é o
+// trade-off certo.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth precisa ser usado dentro de um AuthProvider');

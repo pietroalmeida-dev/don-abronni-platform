@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
@@ -24,7 +27,7 @@
     "mongoose": "^9.8.1",
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
-    "nodemailer": "^9.0.5"
+    "nodemailer": "^10.0.10"
   },
   "devDependencies": {
     "jest": "^30.4.2",

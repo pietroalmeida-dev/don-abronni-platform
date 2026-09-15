@@ -19,6 +19,7 @@ export function ToastProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useToast() {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast precisa ser usado dentro de um ToastProvider');
@@ -26,6 +27,7 @@ export function useToast() {
 }
 
 // Usado apenas pelo componente <Toast /> para renderizar o estado atual.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useToastState() {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToastState precisa ser usado dentro de um ToastProvider');
