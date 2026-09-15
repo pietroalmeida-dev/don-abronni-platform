@@ -47,6 +47,26 @@ integrante rodar o projeto:
 O `frontend/.env` não guarda segredo nenhum (só a URL da API) — pode ser criado a
 partir do `.env.example` sem pedir nada a ninguém.
 
+## Testes
+
+```bash
+npm run test:backend     # Jest — 103 testes (usa mongodb-memory-server, não toca no Atlas)
+npm run test:frontend    # Vitest — 132 testes
+```
+
+No `frontend/`, `npm run lint` roda o ESLint (`--max-warnings 0` — qualquer warning novo quebra o comando de propósito).
+
+## Banco de dados (MongoDB Atlas)
+
+Um único cluster no Atlas, compartilhado pelo time (não um banco por dev) — é assim
+que todo mundo vê os mesmos produtos/pedidos/estoque em qualquer máquina. Cada
+dev usa seu próprio usuário do Atlas (nunca a mesma senha), ver
+["Como um novo integrante entra no projeto"](#como-um-novo-integrante-entra-no-projeto) mais abaixo.
+MongoDB (não relacional) foi escolhido porque o domínio tem documentos
+naturalmente aninhados e sempre lidos juntos (um pedido e seus itens, um usuário e
+seus endereços) — ver os comentários de "DECISÃO DE MODELAGEM" em
+`backend/src/models/*.js` para o raciocínio caso a caso.
+
 ## Arquitetura
 
 ```
@@ -84,5 +104,32 @@ back-end; a "view" é o front-end React, em outro processo/deploy).
 - Gateway de pagamento real.
 - Decremento automático de estoque por pedido (falta modelar ficha técnica).
 - E-mail de recuperação de senha depende de credenciais SMTP a configurar.
+
+## Como um novo integrante entra no projeto
+
+1. Recebe convite como **colaborador** no repositório GitHub (Settings → Collaborators
+   → Add people, feito por quem é dono do repo). Não precisa de acesso "Admin" —
+   permissão de escrita (Write) já é suficiente pra clonar, criar branch e abrir PR.
+2. `git clone https://github.com/pietroalmeida-dev/don-abronni-platform.git`
+3. `npm run install:all`
+4. Cria `backend/.env` e `frontend/.env` a partir dos `.env.example` (seção
+   ["Rodando em outro computador"](#rodando-em-outro-computador-ex-notebook-de-um-integrante)
+   acima) — a connection string do Mongo usa um **usuário próprio dele** no Atlas
+   (nunca a senha de outro integrante), pedida a quem administra o cluster.
+5. `npm run dev` e confere em `http://localhost:5173`.
+
+## Fluxo de contribuição
+
+`main` sempre fica funcional (testado, buildável). Trabalho novo entra por branch +
+Pull Request, nunca commit direto em `main` quando o time é mais de uma pessoa:
+
+```bash
+git checkout main && git pull
+git checkout -b feature/nome-curto-da-mudanca
+# ...altera, testa...
+git add -A && git commit -m "mensagem clara"
+git push -u origin feature/nome-curto-da-mudanca
+# abre Pull Request no GitHub, pede revisão, dá merge depois de aprovado
+```
 
 Ver `frontend/README.md` e `backend/README.md` para detalhes de cada camada.

@@ -13,13 +13,9 @@ npm run preview   # serve o build de produção localmente
 npm run lint      # ESLint
 ```
 
-Antes de rodar, copie as imagens do projeto original para:
-- `public/imagens-pizzas/` (fotos das pizzas — ver `public/imagens-pizzas/LEIA-ME.txt`)
-- `public/images/` (logo do hero e QR Code do Pix — ver `public/images/LEIA-ME.txt`)
-
-Nenhum arquivo binário de imagem fazia parte do que foi fornecido para a migração,
-então os caminhos foram preservados exatamente como estavam, mas os arquivos em si
-precisam ser copiados manualmente.
+As imagens do cardápio (`public/imagens-pizzas/`, 88 arquivos `.webp`) e as da home
+(`public/images/`) já estão commitadas no repositório — nada a copiar manualmente,
+basta `git clone` + `npm install` + `npm run dev`.
 
 ## Estrutura do projeto
 
