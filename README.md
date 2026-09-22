@@ -15,6 +15,24 @@ persistência real em banco de dados.
 | Frete/geolocalização | ViaCEP + Nominatim (OpenStreetMap) + OSRM (rota real) |
 | Testes | Vitest (front, 132 testes) / Jest (back, 103 testes) |
 
+## Repositório público, segredos privados
+
+Este repositório é **público** (código aberto pra apresentação do TCC/portfólio),
+mas isso é só uma camada — as três ficam sempre separadas:
+
+```
+GitHub (público)     → código-fonte, testes, documentação
+MongoDB Atlas         → banco de dados, protegido por usuário/senha (nunca aqui)
+.env (local, por máquina) → credenciais — nunca commitado, um arquivo por dev
+```
+
+Nenhum `.env`, senha, `JWT_SECRET`, connection string ou credencial real está — ou
+jamais deve estar — neste repositório (ver `SECURITY.md`). O que existe aqui são só
+os `.env.example`, com nomes de variável e valores de exemplo, nunca reais. GitHub
+Secret Scanning + Push Protection estão ativos no repositório: um `git push` que
+contenha um padrão de credencial reconhecida é bloqueado automaticamente antes de
+sair da sua máquina.
+
 ## Como rodar
 
 ```bash
@@ -132,4 +150,9 @@ git push -u origin feature/nome-curto-da-mudanca
 # abre Pull Request no GitHub, pede revisão, dá merge depois de aprovado
 ```
 
-Ver `frontend/README.md` e `backend/README.md` para detalhes de cada camada.
+Isso não é só combinado — a branch `main` tem **branch protection** configurada no
+GitHub: exige Pull Request com pelo menos 1 aprovação, e bloqueia force-push e
+exclusão da branch. Não tem como burlar isso com `git push` direto.
+
+Ver `SECURITY.md` para como reportar uma vulnerabilidade, e `frontend/README.md` /
+`backend/README.md` para detalhes de cada camada.
