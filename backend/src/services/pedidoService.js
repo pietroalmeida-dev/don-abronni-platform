@@ -3,7 +3,6 @@
 const pedidoRepository = require('../repositories/pedidoRepository');
 const produtoRepository = require('../repositories/produtoRepository');
 const shippingService = require('./shippingService');
-const paymentService = require('./paymentService');
 const AppError = require('../utils/AppError');
 
 const {
@@ -149,12 +148,11 @@ const pedidoService = {
       origem: 'site',
     });
 
-    if (pagamento.forma === 'pix') {
-      const dadosPix = await paymentService.criarPagamentoPix(total);
-      pedido.pix = dadosPix;
-      await pedido.save();
-    }
-
+    // 🔒 O pedido é criado SEM transação de pagamento — Pix e cartão passam a
+    // cobrar através de um gateway real (POST /api/pagamentos), uma etapa separada
+    // e posterior a esta, para que o valor cobrado nunca dependa de nada calculado
+    // antes de o pedido (e o total recalculado acima) já existir gravado no banco.
+    // Ver paymentService.criarPagamento.
     return pedido;
   },
 
@@ -164,6 +162,25 @@ const pedidoService = {
 
   async listarPorUsuario(usuarioId) {
     return pedidoRepository.listarPorUsuario(usuarioId);
+  },
+
+  // Usado pela tela de Pix/retorno de cartão para perguntar "já confirmou o
+  // pagamento?" a cada poucos segundos, sem esperar o cliente atualizar a página —
+  // é o que faz a confirmação via webhook (assíncrona, do lado do gateway) aparecer
+  // como "automática" pro cliente. Mesma checagem de posse anti-enumeração de
+  // cancelarPeloCliente: mensagem genérica tanto para "não existe" quanto para "é
+  // de outro cliente".
+  async buscarStatus({ usuario, numeroNota }) {
+    const pedido = await pedidoRepository.buscarStatusPorNumeroNota(numeroNota);
+    if (!pedido || String(pedido.usuario) !== String(usuario._id)) {
+      throw new AppError('Pedido não encontrado.', 404);
+    }
+    return {
+      numeroNota: pedido.numeroNota,
+      status: pedido.status,
+      statusPagamento: pedido.pagamento.statusPagamento,
+      transacaoStatus: pedido.transacao?.status || null,
+    };
   },
 
   async atualizarStatus(numeroNota, novoStatus) {

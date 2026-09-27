@@ -12,6 +12,11 @@ router.post('/', autenticar, criarPedidoValidacao, validar, pedidoController.cri
 // GET /api/pedidos/meus — Tela: modal "Meus pedidos" do cliente
 router.get('/meus', autenticar, pedidoController.meus);
 
+// GET /api/pedidos/:numeroNota/status — Tela: Checkout, tela de Pix/retorno de
+// cartão — consultada a cada poucos segundos enquanto aguarda a confirmação do
+// pagamento (assíncrona, via webhook do gateway).
+router.get('/:numeroNota/status', autenticar, pedidoController.status);
+
 // GET /api/pedidos — Tela: painel admin, seção "Pedidos" (todos os pedidos)
 router.get('/', autenticar, autorizar('admin'), pedidoController.listarTodos);
 

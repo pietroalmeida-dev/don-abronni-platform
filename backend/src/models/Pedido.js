@@ -33,18 +33,28 @@ const ItemPedidoSchema = new Schema(
   { _id: true, timestamps: false }
 );
 
-// DECISÃO DE MODELAGEM (pagamento Pix): EMBUTIDO também — é uma relação 1-para-1,
-// pequena, que só existe (e só faz sentido) junto com o pedido específico. Não há
-// motivo para uma coleção separada com um "$lookup" para buscar algo que sempre
-// pertence a exatamente um pedido.
-const PagamentoPixSchema = new Schema(
+// DECISÃO DE MODELAGEM (transação de pagamento): EMBUTIDO também — mesma
+// justificativa de sempre: é uma relação 1-para-1, pequena, que só existe (e só faz
+// sentido) junto com o pedido específico. Generalizada de um antigo "PagamentoPix"
+// para "Transacao" porque agora cobre os dois métodos que passam por gateway (Pix e
+// cartão) — pedidos em dinheiro nunca têm transação, o pagamento é combinado na
+// entrega.
+const TransacaoSchema = new Schema(
   {
+    gateway: { type: String, enum: ['mercadopago'], default: 'mercadopago' },
+    metodo: { type: String, enum: ['pix', 'cartao'], required: true },
+    // Id do pagamento (Pix) ou da preferência de checkout (cartão, antes do
+    // pagamento em si existir) no gateway — é o que o webhook usa para reconciliar
+    // a notificação recebida com este pedido.
+    pagamentoId: { type: String, default: null },
     valor: { type: Number, required: true },
-    qrCode: { type: String, required: true },
-    status: { type: String, enum: ['aguardando', 'pago', 'expirado', 'cancelado'], default: 'aguardando' },
-    expiraEm: { type: Date, required: true },
+    status: { type: String, enum: ['pendente', 'aprovado', 'recusado', 'expirado', 'cancelado'], default: 'pendente' },
+    qrCode: { type: String, default: null },
+    qrCodeBase64: { type: String, default: null },
+    linkPagamento: { type: String, default: null },
+    expiraEm: { type: Date, default: null },
   },
-  { _id: false, timestamps: false }
+  { _id: false, timestamps: true }
 );
 
 const PedidoSchema = new Schema(
@@ -77,7 +87,7 @@ const PedidoSchema = new Schema(
       statusPagamento: { type: String, enum: ['pendente', 'pago'], default: 'pendente' },
     },
 
-    pix: { type: PagamentoPixSchema, default: null },
+    transacao: { type: TransacaoSchema, default: null },
 
     observacao: { type: String, default: '' },
     itens: { type: [ItemPedidoSchema], required: true },

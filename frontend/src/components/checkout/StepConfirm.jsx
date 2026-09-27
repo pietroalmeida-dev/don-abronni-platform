@@ -1,7 +1,7 @@
 import { formatCurrency } from '../../utils/format';
 import { getItemUnitPrice } from '../../contexts/CartContext';
 
-const PAG_LABEL = { pix: '🟢 Pix', cartao: '💳 Cartão na entrega', dinheiro: '💵 Dinheiro na entrega' };
+const PAG_LABEL = { pix: '🟢 Pix', cartao: '💳 Cartão (pago online)', dinheiro: '💵 Dinheiro na entrega' };
 
 export default function StepConfirm({ cart, entrega, pagamento, subtotal, onBack, onConfirm, enviando }) {
   const total = subtotal + (entrega.tipo === 'delivery' ? entrega.taxaEntrega : 0);

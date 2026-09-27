@@ -213,9 +213,93 @@ no código, exige deploy pra mudar). Testado incluir o número da casa (253) nes
 busca: o OSM não tem esse número mapeado para essa rua, então o ponto obtido já é
 o melhor disponível de graça.
 
+## Pagamento (Mercado Pago) — como funciona hoje
+
+`POST /api/pedidos` cria o pedido sem nenhuma transação de pagamento (para Pix e
+cartão — dinheiro nunca passa por gateway, é combinado na entrega). O pagamento é
+uma etapa SEPARADA e posterior, disparada pelo front-end logo depois:
+
+```
+POST /api/pedidos          → cria o pedido, total recalculado no servidor,
+                              pagamento.statusPagamento = 'pendente'
+POST /api/pagamentos       → recebe só { numeroNota } (nunca um valor — o servidor
+                              usa pedido.total, já salvo). Pix: cria uma Order
+                              (API de Orders do Mercado Pago) e devolve
+                              { qrCode, qrCodeBase64 }. Cartão: cria uma Preference
+                              (Checkout Pro) e devolve { linkPagamento } — o
+                              cliente é redirecionado pra lá, os dados do cartão
+                              nunca passam pelo nosso servidor.
+POST /api/webhooks/pagamento → o Mercado Pago chama esta rota (fora do
+                              middleware de autenticação JWT — o gateway não tem
+                              token de usuário nenhum) quando o status do
+                              pagamento muda. paymentService busca o pagamento
+                              completo pelo id recebido, confirma pela
+                              external_reference (= numeroNota) e marca
+                              pagamento.statusPagamento = 'pago'.
+GET /api/pedidos/:numeroNota/status → consultada a cada poucos segundos pela tela
+                              de Pix/retorno de cartão, pra fazer a confirmação
+                              via webhook (assíncrona) aparecer como automática
+                              pro cliente, sem precisar recarregar a página.
+```
+
+Decisões de segurança relevantes:
+- **Assinatura do webhook** (`paymentGatewayRepository.validarAssinaturaWebhook`):
+  o algoritmo HMAC-SHA256 documentado pelo próprio Mercado Pago sobre o cabeçalho
+  `x-signature`. Sem essa checagem, qualquer pessoa que descobrisse a URL do
+  webhook poderia forjar "pagamento aprovado" para qualquer pedido — é a única
+  barreira dessa rota, já que ela não pode exigir um token JWT.
+- **Idempotência**: o Mercado Pago pode reenviar a mesma notificação mais de uma
+  vez (documentado por eles como comportamento esperado). `confirmarPagamentoSeAindaPendente`
+  (`pedidoRepository`) só marca como pago se `statusPagamento` ainda não for
+  `'pago'` — um `findOneAndUpdate` atômico e condicional, sem precisar de uma
+  tabela separada de "eventos já processados".
+- **Valor sempre recalculado no servidor**: `POST /api/pagamentos` não aceita
+  nenhum campo de valor no corpo — usa sempre `pedido.total`, que já foi
+  recalculado a partir do catálogo em `pedidoService.criar` (ver seção de
+  segurança acima). Não há como um cliente adulterar o valor cobrado no gateway.
+- **Cartão via Checkout Pro (hospedado pelo Mercado Pago)**, não um formulário
+  próprio: os dados do cartão nunca chegam ao nosso servidor nem ao nosso
+  front-end, o que tira este projeto do escopo de PCI-DSS.
+
+🚨 **Pegadinhas descobertas testando com credencial real de sandbox** (o Mercado
+Pago mudou bastante esse fluxo em 2026 — a documentação encontrada durante o
+desenvolvimento nem sempre refletia isso):
+- **Pix usa a API de Orders (`Order.create`), não a API de Payments antiga
+  (`Payment.create`)** — chamar `/v1/payments` direto pra criar um Pix responde
+  `401 Unauthorized use of live credentials`, mesmo com uma credencial de teste
+  legítima. A Order criada ainda gera um pagamento clássico por baixo dos panos
+  (é esse id numérico que chega no webhook e que `Payment.get` continua lendo
+  normalmente) — só a *criação* precisou migrar.
+- **Nunca usar `sandbox_init_point`** no link de cartão (Preference/Checkout
+  Pro) — o Mercado Pago removeu o domínio de sandbox separado; usar esse campo
+  com uma credencial atual responde 403. Use sempre `init_point`: a diferença
+  entre teste e produção está inteiramente em qual credencial está em
+  `MERCADOPAGO_ACCESS_TOKEN`, nunca na URL.
+- **Credenciais de teste hoje começam com `APP_USR-`** (geradas a partir de um
+  "usuário de teste" da aplicação), não mais só `TEST-` — as duas formas
+  existem e são válidas, a diferença está em qual aba do painel ("Teste" vs.
+  "Produção") a credencial veio, não no prefixo.
+- **Webhook do Pix chega no tópico `"order"`, não `"payment"`** — são recursos
+  diferentes (a Order tem seu próprio `Order.get`, com vocabulário de status
+  também diferente: `processed`/`accredited` em vez de `approved`). No painel,
+  em "Webhooks > Configurar notificações", isso é um checkbox **separado**
+  ("Order (Mercado Pago)", em "Outros eventos") — só marcar "Pagamentos
+  (legacy)" (que cobre o cartão/Preference) não é suficiente; sem o checkbox de
+  Order marcado, a notificação de um Pix pago nunca chega, silenciosamente.
+- **`auto_return: 'approved'` na Preference (cartão) exige uma
+  `back_urls.success` PUBLICAMENTE alcançável** — com `FRONTEND_URL` apontando
+  pra `localhost` (desenvolvimento sem túnel), o Mercado Pago recusa a criação
+  inteira da preferência com `auto_return invalid. back_url.success must be
+  defined`. `paymentGatewayRepository.criarPreferenciaCartao` só inclui
+  `auto_return` quando a URL de sucesso não é `localhost`/`127.0.0.1` — em
+  desenvolvimento local, o cliente só perde o redirecionamento automático após
+  pagar (precisa clicar em "Voltar ao site"), nunca o pagamento em si.
+
+Configuração completa (como obter credenciais de sandbox, cadastrar o webhook em
+modo teste, e só depois migrar para produção): ver `.env.example`.
+
 ## O que ainda é provisório (marcado com 🚨 no código)
 
-- `paymentService`: gera um "Pix" fictício — precisa de um gateway de pagamento real.
 - **Envio de e-mail de recuperação de senha**: código e infraestrutura prontos
   (`emailService.js` já usa SMTP genérico, funciona com qualquer provedor via
   `.env`), mas as credenciais reais (`EMAIL_USER`/`EMAIL_SMTP_KEY`/`EMAIL_FROM`, ver

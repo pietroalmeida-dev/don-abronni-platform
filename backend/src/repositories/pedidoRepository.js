@@ -21,8 +21,28 @@ const pedidoRepository = {
   async atualizarStatus(numeroNota, status) {
     return Pedido.findOneAndUpdate({ numeroNota }, { status }, { returnDocument: 'after', runValidators: true });
   },
-  async atualizarPix(numeroNota, dadosPix) {
-    return Pedido.findOneAndUpdate({ numeroNota }, { pix: dadosPix }, { returnDocument: 'after', runValidators: true });
+  async atualizarTransacao(numeroNota, transacao) {
+    return Pedido.findOneAndUpdate({ numeroNota }, { transacao }, { returnDocument: 'after', runValidators: true });
+  },
+
+  // Atômico e condicional, mesmo padrão de cancelarSeForDoUsuarioERecebido abaixo:
+  // só marca como pago se AINDA não estiver pago. É isso — não uma tabela separada
+  // de "eventos de webhook já processados" — que torna inofensivo o gateway
+  // reenviar a mesma notificação de pagamento aprovado mais de uma vez (documentado
+  // como comportamento esperado pelo Mercado Pago).
+  async confirmarPagamentoSeAindaPendente(numeroNota, transacaoAtualizada) {
+    return Pedido.findOneAndUpdate(
+      { numeroNota, 'pagamento.statusPagamento': { $ne: 'pago' } },
+      { 'pagamento.statusPagamento': 'pago', transacao: transacaoAtualizada },
+      { returnDocument: 'after', runValidators: true }
+    );
+  },
+
+  // Projeção enxuta para polling do front-end (tela de Pix/retorno de cartão
+  // perguntando "já confirmou?" a cada poucos segundos) — sem isso, cada consulta
+  // traria o pedido inteiro (itens, endereço...) só para ler três campos.
+  async buscarStatusPorNumeroNota(numeroNota) {
+    return Pedido.findOne({ numeroNota }).select('numeroNota usuario status pagamento transacao');
   },
 
   // Update atômico e condicional: só cancela se o pedido AINDA for do usuário e

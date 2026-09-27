@@ -27,10 +27,10 @@ vi.mock('../../services/shippingService', () => ({
   shippingService: { calcularPorCep: vi.fn() },
 }));
 vi.mock('../../services/ordersService', () => ({
-  ordersService: { create: vi.fn(), updateStatus: vi.fn() },
+  ordersService: { create: vi.fn(), updateStatus: vi.fn(), getStatus: vi.fn() },
 }));
 vi.mock('../../services/paymentService', () => ({
-  paymentService: { criarPagamentoPix: vi.fn() },
+  paymentService: { criarPagamento: vi.fn() },
 }));
 
 const sessaoCliente = { id: 'u1', name: 'Pietro Almeida', email: 'pietro@teste.com', role: 'cliente', token: 'tok' };
@@ -74,6 +74,9 @@ describe('CheckoutModal — orquestração do pedido', () => {
     authService.getSession.mockReturnValue(sessaoCliente);
     addressesService.getByUser.mockResolvedValue([enderecoSalvo]);
     shippingService.calcularPorCep.mockResolvedValue(freteDisponivel);
+    // Polling da tela de Pix (ver PixPayment) — pendente por padrão, só os testes
+    // que se importam com a confirmação de pagamento sobrescrevem isso.
+    ordersService.getStatus.mockResolvedValue({ ok: true, dados: { statusPagamento: 'pendente', transacaoStatus: 'pendente' } });
   });
 
   it('abre sempre no passo 1 (Entrega), com o indicador de passos correto', async () => {
@@ -99,7 +102,7 @@ describe('CheckoutModal — orquestração do pedido', () => {
 
   it('monta o pedido corretamente: sabor único, borda em minúsculo, subtotal por item', async () => {
     ordersService.create.mockResolvedValue({ ok: true, pedido: { id: 'DA-20260810-001' } });
-    paymentService.criarPagamentoPix.mockResolvedValue({ ok: true, dados: { qr_code: 'fake' } });
+    paymentService.criarPagamento.mockResolvedValue({ ok: true, dados: { qrCode: 'fake', qrCodeBase64: null, linkPagamento: null, status: 'pendente' } });
     const user = userEvent.setup();
     renderCheckout({ itensCarrinho: [pizzaComBorda] });
     await user.click(screen.getByTestId('setup-add-all'));
@@ -127,7 +130,7 @@ describe('CheckoutModal — orquestração do pedido', () => {
 
   it('pagamento em Pix: mostra a tela de Pix (PixPayment) em vez de fechar o modal', async () => {
     ordersService.create.mockResolvedValue({ ok: true, pedido: { id: 'DA-20260810-002' } });
-    paymentService.criarPagamentoPix.mockResolvedValue({ ok: true, dados: { qr_code: 'chave-fake-123' } });
+    paymentService.criarPagamento.mockResolvedValue({ ok: true, dados: { qrCode: 'chave-fake-123', qrCodeBase64: null, linkPagamento: null, status: 'pendente' } });
     const user = userEvent.setup();
     const { onClose } = renderCheckout();
     await user.click(screen.getByTestId('setup-add-all'));
@@ -142,7 +145,7 @@ describe('CheckoutModal — orquestração do pedido', () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
-  it('pagamento em dinheiro/cartão: envia direto pro WhatsApp e fecha o modal, sem tela de Pix', async () => {
+  it('pagamento em dinheiro: envia direto pro WhatsApp e fecha o modal, sem tela de Pix nem chamada a gateway nenhum', async () => {
     ordersService.create.mockResolvedValue({ ok: true, pedido: { id: 'DA-20260810-003' } });
     const abrirJanela = vi.spyOn(window, 'open').mockImplementation(() => {});
     const user = userEvent.setup();
@@ -159,8 +162,53 @@ describe('CheckoutModal — orquestração do pedido', () => {
     expect(abrirJanela).toHaveBeenCalledWith(expect.stringContaining('wa.me'), '_blank');
     expect(onClose).toHaveBeenCalledOnce();
     expect(screen.queryByText(/pagamento via pix/i)).not.toBeInTheDocument();
+    expect(paymentService.criarPagamento).not.toHaveBeenCalled();
 
     abrirJanela.mockRestore();
+  });
+
+  // 🔒 Cartão deixou de ser "pago na entrega": agora cria uma cobrança real no
+  // gateway (Checkout Pro) e redireciona o navegador pra lá — os dados do cartão
+  // nunca passam pelo nosso front-end.
+  it('pagamento em cartão: cria a cobrança no gateway e redireciona para o checkout do Mercado Pago', async () => {
+    ordersService.create.mockResolvedValue({ ok: true, pedido: { id: 'DA-20260810-004' } });
+    paymentService.criarPagamento.mockResolvedValue({ ok: true, dados: { qrCode: null, qrCodeBase64: null, linkPagamento: 'https://sandbox.mercadopago.com/checkout/pref-456', status: 'pendente' } });
+    const abrirJanela = vi.spyOn(window, 'open').mockImplementation(() => {});
+    vi.stubGlobal('location', { ...window.location, href: '' });
+    const user = userEvent.setup();
+    renderCheckout();
+    await user.click(screen.getByTestId('setup-add-all'));
+
+    await avancarParaPagamento(user);
+    const secaoPagamento = (await screen.findByText('Forma de pagamento')).closest('.checkout-body');
+    await user.click(within(secaoPagamento).getByRole('radio', { name: /cartão/i }));
+    await user.click(screen.getByRole('button', { name: /próximo/i }));
+    await user.click(await screen.findByRole('button', { name: /confirmar e enviar/i }));
+
+    await vi.waitFor(() => expect(paymentService.criarPagamento).toHaveBeenCalledWith('DA-20260810-004'));
+    expect(window.location.href).toBe('https://sandbox.mercadopago.com/checkout/pref-456');
+    expect(abrirJanela).toHaveBeenCalledWith(expect.stringContaining('wa.me'), '_blank');
+    expect(screen.queryByText(/pagamento via pix/i)).not.toBeInTheDocument();
+
+    abrirJanela.mockRestore();
+    vi.unstubAllGlobals();
+  });
+
+  it('pagamento em cartão recusado pelo backend ao criar a cobrança: mostra o erro, permanece no checkout', async () => {
+    ordersService.create.mockResolvedValue({ ok: true, pedido: { id: 'DA-20260810-005' } });
+    paymentService.criarPagamento.mockResolvedValue({ ok: false, erro: 'Gateway de pagamento indisponível.' });
+    const user = userEvent.setup();
+    renderCheckout();
+    await user.click(screen.getByTestId('setup-add-all'));
+
+    await avancarParaPagamento(user);
+    const secaoPagamento = (await screen.findByText('Forma de pagamento')).closest('.checkout-body');
+    await user.click(within(secaoPagamento).getByRole('radio', { name: /cartão/i }));
+    await user.click(screen.getByRole('button', { name: /próximo/i }));
+    await user.click(await screen.findByRole('button', { name: /confirmar e enviar/i }));
+
+    expect(await screen.findByText('Gateway de pagamento indisponível.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /confirmar e enviar/i })).not.toBeDisabled();
   });
 
   it('pedido recusado pelo backend: mostra o erro, permanece no passo 3 (não perde os dados já preenchidos)', async () => {
