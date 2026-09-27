@@ -21,6 +21,11 @@ const pedidoController = {
     res.status(200).json(pedidos);
   }),
 
+  status: asyncHandler(async (req, res) => {
+    const status = await pedidoService.buscarStatus({ usuario: req.usuario, numeroNota: req.params.numeroNota });
+    res.status(200).json(status);
+  }),
+
   listarTodos: asyncHandler(async (req, res) => {
     const pedidos = await pedidoService.listarTodos();
     res.status(200).json(pedidos);

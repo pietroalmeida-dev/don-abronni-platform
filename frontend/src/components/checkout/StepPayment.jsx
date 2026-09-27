@@ -24,7 +24,7 @@ export default function StepPayment({ pagamento, setPagamento, onNext, onBack })
           <input type="radio" name="formaPagamento" checked={forma === 'cartao'} onChange={() => setForma('cartao')} />
           <i className="fa-solid fa-credit-card" style={{ color: '#4a90d9' }} />
           <span>Cartão</span>
-          <small>Na entrega</small>
+          <small>Pagamento online</small>
         </label>
         <label className={`checkout-radio-card ${forma === 'dinheiro' ? 'active' : ''}`}>
           <input type="radio" name="formaPagamento" checked={forma === 'dinheiro'} onChange={() => setForma('dinheiro')} />
@@ -46,17 +46,23 @@ export default function StepPayment({ pagamento, setPagamento, onNext, onBack })
           </div>
         </div>
       )}
-      {(forma === 'cartao' || forma === 'dinheiro') && (
+      {forma === 'cartao' && (
         <div className="pagamento-section">
           <div className="pagamento-aviso">
             <i className="fa-solid fa-circle-info" />
-            {forma === 'cartao'
-              ? 'Pagamento realizado na entrega. Aceitamos todos os cartões de débito e crédito.'
-              : 'Pagamento em dinheiro na entrega. Informe se precisar de troco.'}
+            Você será redirecionado para o ambiente seguro do Mercado Pago para inserir os dados do cartão.
+          </div>
+        </div>
+      )}
+      {forma === 'dinheiro' && (
+        <div className="pagamento-section">
+          <div className="pagamento-aviso">
+            <i className="fa-solid fa-circle-info" />
+            Pagamento em dinheiro na entrega. Informe se precisar de troco.
           </div>
           <div className="checkout-form-group" style={{ marginTop: '1rem' }}>
             <label>Troco para (opcional)</label>
-            <input value={troco} onChange={(e) => setTroco(e.target.value)} placeholder={forma === 'dinheiro' ? 'Ex: 50,00' : 'Sem necessidade de troco'} />
+            <input value={troco} onChange={(e) => setTroco(e.target.value)} placeholder="Ex: 50,00" />
           </div>
         </div>
       )}

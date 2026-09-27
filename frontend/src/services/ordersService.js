@@ -22,7 +22,7 @@ function paraPedidoFrontend(pedido) {
     itens: pedido.itens,
     entrega: pedido.entrega,
     pagamento: pedido.pagamento,
-    pix: pedido.pix,
+    transacao: pedido.transacao,
     observacao: pedido.observacao,
     subtotal: pedido.subtotal,
     total: pedido.total,
@@ -83,6 +83,19 @@ export const ordersService = {
       };
       const criado = await api.post('/pedidos', payload, tokenCliente());
       return { ok: true, pedido: paraPedidoFrontend(criado) };
+    } catch (erro) {
+      return { ok: false, erro: erro.message };
+    }
+  },
+
+  // Consultada em polling pela tela de Pix/retorno de cartão, a cada poucos
+  // segundos, pra saber se o webhook do gateway já confirmou o pagamento — sem
+  // isso, a confirmação (que acontece do lado do servidor, de forma assíncrona)
+  // nunca apareceria pro cliente sem ele recarregar a página manualmente.
+  async getStatus(numeroNota) {
+    try {
+      const dados = await api.get(`/pedidos/${numeroNota}/status`, tokenCliente());
+      return { ok: true, dados };
     } catch (erro) {
       return { ok: false, erro: erro.message };
     }

@@ -5,6 +5,7 @@ import { useToast } from '../../contexts/ToastContext';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { addressesService } from '../../services/addressesService';
 import { ordersService } from '../../services/ordersService';
+import { paymentService } from '../../services/paymentService';
 import { CONFIG } from '../../config';
 import { formatCurrency } from '../../utils/format';
 import StepDelivery from './StepDelivery';
@@ -67,7 +68,7 @@ export default function CheckoutModal({ onClose }) {
     const endStr = entrega.tipo === 'delivery'
       ? `📍 *Endereço:* ${entrega.endereco.rua}, ${entrega.endereco.numero}${entrega.endereco.complemento ? `, ${entrega.endereco.complemento}` : ''} — ${entrega.endereco.bairro}, CEP ${entrega.endereco.cep}`
       : '🏪 *Retirada no local*';
-    const pagStr = { pix: '🟢 Pix', cartao: '💳 Cartão na entrega', dinheiro: '💵 Dinheiro na entrega' };
+    const pagStr = { pix: '🟢 Pix', cartao: '💳 Cartão (pago online)', dinheiro: '💵 Dinheiro na entrega' };
 
     return `🍕 *DON ABRONNI — NOVO PEDIDO*
 ━━━━━━━━━━━━━━━━━━━━━
@@ -129,6 +130,20 @@ ${pagamento.obs ? `📝 *Obs:* ${pagamento.obs}` : ''}
     if (pagamento.forma === 'pix') {
       setPixData({ total, nota, mensagem });
       setEnviando(false);
+    } else if (pagamento.forma === 'cartao') {
+      // Cartão agora é pago de verdade no checkout do Mercado Pago (Checkout Pro) —
+      // não mais "na entrega". O pedido já foi criado (e a cozinha já é avisada
+      // pelo WhatsApp, como antes); só o pagamento em si acontece numa página
+      // hospedada pelo gateway, pra onde o navegador é redirecionado a seguir.
+      const resultadoPagamento = await paymentService.criarPagamento(nota);
+      if (!resultadoPagamento.ok) {
+        setEnviando(false);
+        showToast(resultadoPagamento.erro || 'Não foi possível iniciar o pagamento com cartão. Tente novamente.', 'erro');
+        return;
+      }
+      clearCart();
+      window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`, '_blank');
+      window.location.href = resultadoPagamento.dados.linkPagamento;
     } else {
       finalizarEnvio(mensagem, nota);
     }
@@ -150,7 +165,6 @@ ${pagamento.obs ? `📝 *Obs:* ${pagamento.obs}` : ''}
             total={pixData.total}
             nota={pixData.nota}
             mensagemWhatsapp={pixData.mensagem}
-            emailCliente={session?.email}
             onFinish={(mensagem) => finalizarEnvio(mensagem, pixData.nota)}
             onCancel={onClose}
           />

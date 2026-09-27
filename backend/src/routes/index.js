@@ -6,6 +6,8 @@ router.use('/auth', require('./authRoutes'));
 router.use('/produtos', require('./catalogoRoutes'));
 router.use('/enderecos', require('./enderecoRoutes'));
 router.use('/pedidos', require('./pedidoRoutes'));
+router.use('/pagamentos', require('./paymentRoutes'));
+router.use('/webhooks', require('./webhookRoutes'));
 router.use('/frete', require('./freteRoutes'));
 router.use('/estoque', require('./estoqueRoutes'));
 router.use('/funcionarios', require('./funcionarioRoutes'));
