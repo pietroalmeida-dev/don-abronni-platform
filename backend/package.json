@@ -27,7 +27,7 @@
     "mongoose": "^9.8.1",
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
-    "nodemailer": "^10.0.10"
+    "nodemailer": "^10.1.4"
   },
   "devDependencies": {
     "jest": "^30.4.2",
